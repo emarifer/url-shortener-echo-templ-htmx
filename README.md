@@ -7,7 +7,7 @@
 A Full Stack application using Golang's Echo framework & </>htmx.
 
 <div style="text-align: center;">
-https://img.shields.io/github/license/emarifer/url-shortener-echo-templ-htmx.svg
+![GitHub license](https://img.shields.io/github/license/emarifer/url-shortener-echo-templ-htmx.svg)
 </div>
 
 ## 🤔 What Stack have we used?
