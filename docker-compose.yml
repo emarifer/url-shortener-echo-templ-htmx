@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:alpine
+    container_name: shortify-db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./_postgres_app_data:/var/lib/postgresql/data
+      - ./postgresdb_init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=shortify_db
+
+# IMPORTANTE: Si el volumen va a estar dentro de la carpeta de la
+# aplicación será conveniente darle al volumen un numbre precedido por "_",
+# porque así Go lo ignorará y no dará problemas (en los test, descarga de
+# paquetes, etc.)
+
+# docker compose up -d
+# docker container start shortify-db
+# docker container stop shortify-db
+# docker exec -it shortify-db psql -U admin -W shortify_db
+# (pass: admin)
+
+# Listing databases in PostgreSQL: \l or \l+
+# Showing tables from PostgreSQL: \dt
+# PostgreSQL DESCRIBE TABLE using psql: \d table_name (\d links)
+# Listing table contents: select * from links;
+# SQL Delete Records within a specific Range. VER:
+# delete from links where id between 7 and 15;
+# https://stackoverflow.com/questions/8225036/sql-delete-records-within-a-specific-range
+# delete from account where id between 31 and 33;
+# Exit the database: \q
+
+# PostgreSQL Foreign Key:
+# https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/
+
+# How to Set a TIMESTAMP as a Default Column Value in PostgreSQL:
+# https://www.commandprompt.com/education/how-to-set-a-timestamp-as-a-default-column-value-in-postgresql/

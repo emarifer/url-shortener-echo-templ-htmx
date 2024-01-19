@@ -1,0 +1,40 @@
+package components
+
+templ Navbar(username string, fromProtected bool) {
+	<nav class="navbar bg-neutral text-info fixed top-0 z-10">
+		<div class="navbar-start">
+			<a hx-swap="transition:true" class="btn btn-ghost text-xl" href="/">
+				<img class="w-6" src="/img/icon.png" alt="logo"/>
+				Shortify
+			</a>
+		</div>
+		<div class="navbar-end">
+			if fromProtected {
+				@Dropdown(username)
+				<!-- <span class="font-bold mr-8">
+					# { username }
+				</span>
+				<a hx-swap="transition:true" class="btn btn-ghost text-lg" href="/todo/list">
+					Tasks
+				</a>
+				<button
+ 					hx-swap="transition:true"
+ 					hx-post="/logout"
+ 					hx-confirm="Are you sure you want to log out?"
+ 					hx-target="body"
+ 					hx-push-url="true"
+ 					class="btn btn-ghost text-lg"
+				>
+					Logout
+				</button> -->
+			} else {
+				<a hx-swap="transition:true" class="btn btn-ghost text-lg" href="/register">
+					Register
+				</a>
+				<a hx-swap="transition:true" class="btn btn-ghost text-lg" href="/login">
+					Login
+				</a>
+			}
+		</div>
+	</nav>
+}

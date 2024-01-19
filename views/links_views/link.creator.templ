@@ -1,0 +1,44 @@
+package links_views
+
+import "github.com/emarifer/url-shortener-echo-templ-htmx/views/components"
+
+templ LinkCreator(randomSlug string) {
+	<h1 class="text-2xl font-bold text-center mb-8">
+		Create your short link
+	</h1>
+	<section class="max-w-2xl w-4/5 h-96 mx-auto bg-neutral rounded-lg shadow-xl">
+		<form class="rounded-xl flex flex-col gap-4 w-11/12 p-4 mx-auto" action="" method="post" hx-swap="transition:true">
+			<label class="flex flex-col justify-start gap-2">
+				Enter the URL here:
+				<input
+ 					class="input input-bordered input-primary bg-slate-800"
+ 					type="url"
+ 					name="url"
+ 					required
+ 					autofocus
+ 					placeholder="https://"
+				/>
+			</label>
+			@components.InputSlug(randomSlug)
+			<label class="flex flex-col justify-start gap-2">
+				Description (optional):
+				<textarea
+ 					class="textarea textarea-primary h-20 max-h-20 bg-slate-800"
+ 					name="description"
+ 					maxlength="255"
+				></textarea>
+			</label>
+			<footer class="card-actions flex gap-4 justify-end">
+				<button class="badge badge-primary p-4 hover:scale-[1.1]">
+					Save
+				</button>
+				<a
+ 					href="/dash"
+ 					class="badge badge-ghost p-4 hover:scale-[1.1]"
+				>
+					Cancel
+				</a>
+			</footer>
+		</form>
+	</section>
+}

@@ -1,0 +1,52 @@
+package auth_views
+
+import "github.com/emarifer/url-shortener-echo-templ-htmx/views/layout"
+
+templ Home(fromProtected bool) {
+	<section class="mx-auto w-fit flex flex-col gap-8 text-center">
+		<h1 class="text-5xl font-bold">Open Source Link Shortener</h1>
+		<p class="text-2xl font-thin">
+			unlimited links & custom slugs
+		</p>
+		<hr class="my-4 w-4/5 mx-auto opacity-25"/>
+		if !fromProtected {
+			<a
+ 				hx-swap="transition:true"
+ 				href="/register"
+ 				class="text-base font-thin hover:text-sky-500 ease-in duration-300"
+			>
+				Do not you have an account yet?
+			</a>
+		}
+		<footer class="flex gap-4 justify-center">
+			<a
+ 				hx-swap="transition:true"
+ 				href="/dash"
+ 				class="badge badge-ghost px-6 py-4 hover:scale-[1.1] text-lg font-thin"
+			>
+				🚀&nbsp;&nbsp;&nbsp;Getting Started
+			</a>
+			<a
+ 				hx-swap="transition:true"
+ 				href="https://github.com/emarifer/url-shortener-echo-templ-htmx"
+ 				target="_blank"
+ 				class="badge badge-ghost px-6 py-4 hover:scale-[1.1] text-lg font-thin"
+			>
+				⭐&nbsp;&nbsp;&nbsp;Star on GitHub
+			</a>
+		</footer>
+	</section>
+}
+
+templ HomeIndex(
+    title,
+    username string,
+    fromProtected bool,
+    isError bool,
+	errMsgs, sucMsgs []string,
+    cmp templ.Component,
+    ) {
+	@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
+		@cmp
+	}
+}

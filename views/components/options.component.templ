@@ -1,0 +1,73 @@
+package components
+
+import "fmt"
+
+templ Options(slug, description string, id int) {
+	<div
+ 		id="options"
+ 		class="dropdown dropdown-bottom dropdown-end absolute top-3 right-3"
+	>
+		<div
+ 			tabindex="0"
+ 			role="button"
+ 			class="text-neutral-400 hover:text-white cursor-pointer m-1"
+ 			title="Options"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="currentColor" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M10.5 1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4H1.5a.5.5 0 0 1 0-1H10V1.5a.5.5 0 0 1 .5-.5M12 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m-6.5 2A.5.5 0 0 1 6 6v1.5h8.5a.5.5 0 0 1 0 1H6V10a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5M1 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 1 8m9.5 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V13H1.5a.5.5 0 0 1 0-1H10v-1.5a.5.5 0 0 1 .5-.5m1.5 2.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"></path>
+			</svg>
+		</div>
+		<ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+			<li>
+				<a
+ 					hx-get={
+						fmt.Sprintf(
+							"/dash/edit?slug=%s&description=%s&id=%d",
+							slug,
+							description,
+							id,
+						),
+					}
+ 					hx-target="body"
+ 					hx-swap="beforeend"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path>
+					</svg>
+					&nbsp;&nbsp;&nbsp;Edit
+				</a>
+			</li>
+			<li>
+				<a
+ 					hx-swap="transition:true"
+ 					hx-delete={ fmt.Sprintf("/dash/delete/%s", slug) }
+ 					hx-target="body"
+ 					hx-confirm={ slug }
+ 					onClick="this.addEventListener('htmx:confirm', (e) => {
+						e.preventDefault()
+						Swal.fire({
+							title: 'Do you want to perform this action?',
+							text: `If you delete the link '/s/${e.detail.question}' you will not be able to reverse this`,
+							icon: 'warning',
+							background: '#1D232A',
+							color: '#A6ADBA',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, delete it!'
+						}).then((result) => {
+							if(result.isConfirmed) e.detail.issueRequest(true);
+						})
+					})"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+						<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+						<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+					</svg>
+					&nbsp;&nbsp;&nbsp;Delete
+				</a>
+			</li>
+		</ul>
+	</div>
+}

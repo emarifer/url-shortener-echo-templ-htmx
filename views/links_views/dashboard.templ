@@ -1,0 +1,53 @@
+package links_views
+
+import (
+	"strings"
+
+	"github.com/emarifer/url-shortener-echo-templ-htmx/views/layout"
+	"github.com/emarifer/url-shortener-echo-templ-htmx/internal/model"
+	"github.com/emarifer/url-shortener-echo-templ-htmx/views/components"
+)
+
+templ Dashboard(titlePage, host, tz string, links []model.Link) {
+	<h1 class="text-3xl font-bold text-center mb-12">Dashboard</h1>
+	<div class="flex justify-between max-w-2xl mx-auto border-b border-b-slate-600 mb-8 pb-2">
+		<h2 class="text-xl font-black">
+			{ strings.Trim(titlePage, "| ") }
+		</h2>
+		<a
+ 			hx-swap="transition:true"
+ 			class="badge badge-info p-4 hover:scale-[1.1]"
+ 			href="/dash/create"
+		>
+			+ Create new link
+		</a>
+	</div>
+	<section
+ 		class="container mx-auto px-8 rounded-lg h-[420px] overflow-y-auto no-scrollbar"
+	>
+		if len(links) != 0 {
+			<ul class="grid grid-cols-3 gap-2">
+				for _, link := range links {
+					@components.Card(host, tz, link)
+				}
+			</ul>
+		} else {
+			<p class="text-center text-xl text-info font-semibold">
+				You still don't have any link
+			</p>
+		}
+	</section>
+}
+
+templ DashboardIndex(
+    title,
+    username string,
+    fromProtected bool,
+    isError bool,
+	errMsgs, sucMsgs []string,
+    cmp templ.Component,
+    ) {
+	@layout.Base(title, username, fromProtected, isError, errMsgs, sucMsgs) {
+		@cmp
+	}
+}

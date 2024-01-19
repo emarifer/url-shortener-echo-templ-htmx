@@ -1,0 +1,57 @@
+package components
+
+import "github.com/emarifer/url-shortener-echo-templ-htmx/timezone_conversion"
+
+import (
+	"github.com/emarifer/url-shortener-echo-templ-htmx/internal/model"
+)
+
+templ Card(host, tz string, link model.Link) {
+	<li
+ 		class="card max-h-40 bg-base-300 shadow-xl hover:-translate-y-0.5 ease-in duration-150 relative"
+	>
+		@Options(link.Slug, link.Description, link.ID)
+		<div class="card-body">
+			<div class="flex justify-start items-center gap-4">
+				<h2 class="card-title">/s/{ link.Slug }</h2>
+				<div class="hidden">
+					{ host }/s/{ link.Slug }
+				</div>
+				<button
+ 					title="Copy"
+ 					class="cursor-pointer"
+ 					_="on click get the innerText of the previous <div/>
+                    then writeText(the result) with the navigator's clipboard
+                    put '✓ Copied!' into the next <output/>
+                    wait 2s put '' into the next <output/>"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"></path>
+					</svg>
+				</button>
+				<output
+ 					class="text-green-500 text-xs font-semibold text-nowrap -translate-x-[66px] translate-y-5"
+				></output>
+			</div>
+			<p
+ 				class="text-nowrap text-ellipsis overflow-hidden opacity-25"
+ 				title={ link.Url }
+			>
+				{ link.Url }
+			</p>
+			<p
+ 				title={ link.Description }
+ 				class="text-sm text-nowrap text-ellipsis overflow-hidden"
+			>
+				if len(link.Description) != 0 {
+					{ link.Description }
+				} else {
+					No description.
+				}
+			</p>
+		</div>
+		<span class="text-[11px] font-bold text-info absolute bottom-3 left-3">
+			{ timezone_conversion.ConvertDateTime(tz, link.CreatedAt) }
+		</span>
+	</li>
+}
