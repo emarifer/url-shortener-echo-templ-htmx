@@ -118,6 +118,12 @@ $ docker container stop shortify-db # stop container
 $ docker exec -it shortify-db psql -U admin -W shortify_db # (pass: admin) access the database
 ```
 
+Download the necessary dependencies:
+
+```
+$ go mod tidy
+```
+
 Start the app in development mode:
 
 ```
