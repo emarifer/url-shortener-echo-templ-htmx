@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/emarifer/url-shortener-echo-templ-htmx/internal/service"
 	"github.com/emarifer/url-shortener-echo-templ-htmx/views/auth_views"
@@ -38,11 +39,21 @@ func (a *API) registerHandler(c echo.Context) error {
 	ctx := c.Request().Context()
 
 	if c.Request().Method == "POST" {
+		pass := strings.Trim(c.FormValue("password"), " ")
+		cPass := strings.Trim(c.FormValue("confirm-pass"), " ")
+		if pass != cPass {
+			setFlashmessages(
+				c, "error", "passwords do not match",
+			)
+
+			return c.Redirect(http.StatusSeeOther, "/register")
+		}
+
 		err := a.serv.RegisterUser(
 			ctx,
-			c.FormValue("email"),
-			c.FormValue("username"),
-			c.FormValue("password"),
+			strings.Trim(c.FormValue("email"), " "),
+			strings.Trim(c.FormValue("username"), " "),
+			pass,
 		)
 		if err != nil {
 			if err == service.ErrUserAlreadyExists {
@@ -93,8 +104,8 @@ func (a *API) loginHandler(c echo.Context) error {
 		// Authentication goes here
 		user, err := a.serv.LoginUser(
 			ctx,
-			c.FormValue("email"),
-			c.FormValue("password"),
+			strings.Trim(c.FormValue("email"), " "),
+			strings.Trim(c.FormValue("password"), " "),
 		)
 		if err != nil {
 			if err == service.ErrInvalidCredentials {

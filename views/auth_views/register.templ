@@ -43,6 +43,20 @@ templ Register(fromProtected bool) {
 					/>
 				</label>
 				<label class="flex flex-col justify-start gap-2">
+					Confirm Password:
+					<input
+ 						class="input input-bordered input-primary bg-slate-800"
+ 						type="password"
+ 						name="confirm-pass"
+ 						required
+ 						minlength="6"
+ 						disabled?={ fromProtected }
+ 						if fromProtected {
+							value="disabled"
+						}
+					/>
+				</label>
+				<label class="flex flex-col justify-start gap-2">
 					Username:
 					<input
  						class="input input-bordered input-primary bg-slate-800"
