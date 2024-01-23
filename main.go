@@ -79,6 +79,16 @@ https://stackoverflow.com/questions/72875958/golang-binding-headers-in-echo-api
 Postgresql - Composite unique constraints:
 https://www.beekeeperstudio.io/blog/guide-to-unique-constraints-in-postgresql#composite-unique-constraints
 
+JavaScript to toggle "text/password" in
+the view password button of the login form:
+onclick="
+	const e = document.getElementById('togglePassword');
+	if (e.type == 'password') {
+		e.type = 'text';
+	} else {
+		e.type = 'password';
+	}"
+
 */
 
 /* CHECKS FUNCTIONS:
