@@ -16,6 +16,9 @@ type Service interface {
 	AddLink(ctx context.Context, link *entity.Link) error
 	RecoverLinks(ctx context.Context, user_id string) ([]model.Link, error)
 	RecoverLink(ctx context.Context, slug string) (*model.Link, error)
+	SearchLinksByDescription(
+		ctx context.Context, description, user_id string,
+	) ([]model.Link, error)
 	UpdateLink(ctx context.Context, description string, id int) error
 	RemoveLink(ctx context.Context, slug, user_id string) error
 }

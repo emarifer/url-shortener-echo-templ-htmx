@@ -10,10 +10,9 @@ import "context"
 import "io"
 import "bytes"
 
-import "github.com/emarifer/url-shortener-echo-templ-htmx/timezone_conversion"
-
 import (
 	"github.com/emarifer/url-shortener-echo-templ-htmx/internal/model"
+	"github.com/emarifer/url-shortener-echo-templ-htmx/timezone_conversion"
 )
 
 func Card(host, tz string, link model.Link) templ.Component {

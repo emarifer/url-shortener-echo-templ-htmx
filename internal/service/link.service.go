@@ -90,6 +90,31 @@ func (s *serv) RecoverLink(
 	return ml, nil
 }
 
+func (s *serv) SearchLinksByDescription(
+	ctx context.Context, description, user_id string,
+) ([]model.Link, error) {
+	ll := []model.Link{}
+
+	entityLinks, err := s.repo.GetLinksByDescription(ctx, description, user_id)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, el := range entityLinks {
+		l := model.Link{
+			ID:          el.ID,
+			Url:         el.Url,
+			Slug:        el.Slug,
+			Description: el.Description,
+			CreatedAt:   el.CreatedAt,
+		}
+
+		ll = append(ll, l)
+	}
+
+	return ll, nil
+}
+
 func (s *serv) UpdateLink(
 	ctx context.Context, description string, id int,
 ) error {

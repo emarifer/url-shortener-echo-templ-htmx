@@ -1,5 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+
 CREATE TABLE IF NOT EXISTS users (
     user_id UUID NOT NULL DEFAULT (uuid_generate_v4()),
     email VARCHAR(255) NOT NULL,
@@ -21,3 +23,5 @@ CREATE TABLE IF NOT EXISTS links (
 	        REFERENCES users(user_id)
 	        ON DELETE CASCADE
 );
+
+CREATE INDEX trgm_idx_links_description ON links USING gin (description gin_trgm_ops);

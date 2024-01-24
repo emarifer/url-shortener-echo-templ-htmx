@@ -13,6 +13,7 @@ func (a *API) RegisterRoutes(e *echo.Echo) {
 	protectedGroup := e.Group("/dash", a.authMiddleware)
 	/* ↓ Protected Routes ↓ */
 	protectedGroup.GET("", a.dashboardHandler)
+	protectedGroup.GET("/search", a.searchLinksHandler)
 	protectedGroup.GET("/create", a.createLinkHandler)
 	protectedGroup.POST("/create", a.createLinkHandler)
 	protectedGroup.GET("/randomize", a.createRandomSlugHandler)

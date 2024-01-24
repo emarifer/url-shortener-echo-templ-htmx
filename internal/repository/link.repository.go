@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/emarifer/url-shortener-echo-templ-htmx/internal/entity"
 )
@@ -60,6 +61,31 @@ func (r *repo) GetLinks(
 	ll := []entity.Link{}
 
 	err := r.db.SelectContext(ctx, &ll, qryGetAllLinks, user_id)
+	if err != nil {
+		return nil, err
+	}
+
+	return ll, nil
+}
+
+func (r *repo) GetLinksByDescription(
+	ctx context.Context, description, user_id string,
+) ([]entity.Link, error) {
+	qryGetLinksByDescription := `
+		SELECT * FROM links
+		WHERE description ILIKE '%s' AND user_id = $1
+		ORDER BY created_at DESC;
+	`
+	description = "%" + description + "%"
+	qryGetLinksByDescription = fmt.Sprintf(
+		qryGetLinksByDescription, description,
+	)
+
+	ll := []entity.Link{}
+
+	err := r.db.SelectContext(
+		ctx, &ll, qryGetLinksByDescription, user_id,
+	)
 	if err != nil {
 		return nil, err
 	}

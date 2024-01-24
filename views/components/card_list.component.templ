@@ -1,0 +1,19 @@
+package components
+
+import (
+	"github.com/emarifer/url-shortener-echo-templ-htmx/internal/model"
+)
+
+templ CardList(host, tz string, links []model.Link) {
+	if len(links) != 0 {
+		<ul class="grid grid-cols-3 gap-2">
+			for _, link := range links {
+				@Card(host, tz, link)
+			}
+		</ul>
+	} else {
+		<p class="text-center text-xl text-info font-semibold">
+			There is no match
+		</p>
+	}
+}

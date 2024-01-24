@@ -15,6 +15,9 @@ type Repository interface {
 	SaveLink(ctx context.Context, link *entity.Link) error
 	GetLink(ctx context.Context, slug string) (*entity.Link, error)
 	GetLinks(ctx context.Context, user_id string) ([]entity.Link, error)
+	GetLinksByDescription(
+		ctx context.Context, description, user_id string,
+	) ([]entity.Link, error)
 	UpdateLink(ctx context.Context, description string, id int) error
 	DeleteLink(ctx context.Context, slug, user_id string) (int64, error)
 }

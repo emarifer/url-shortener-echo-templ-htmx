@@ -58,6 +58,54 @@ func (a *API) dashboardHandler(c echo.Context) error {
 	))
 }
 
+func (a *API) searchLinksHandler(c echo.Context) error {
+	isError = false
+
+	ctx := c.Request().Context()
+	userId := c.Get(user_id_key).(string)
+
+	/* titlePage := fmt.Sprintf(
+		"| %s's Links",
+		cases.Title(language.English).String(c.Get(username_key).(string)),
+	) */
+
+	searchDescription := strings.Trim(c.FormValue("search"), " ")
+
+	searchedLinks, err := a.serv.SearchLinksByDescription(
+		ctx, searchDescription, userId,
+	)
+	if err != nil {
+
+		return echo.NewHTTPError(
+			echo.ErrInternalServerError.Code,
+			fmt.Sprintf(
+				"something went wrong: %s",
+				err,
+			))
+	}
+
+	return a.renderView(c, components.CardList(
+		c.Scheme()+"://"+c.Request().Host,
+		c.Get(tzone_key).(string),
+		searchedLinks,
+	))
+
+	/* return a.renderView(c, links_views.DashboardIndex(
+		titlePage,
+		c.Get(username_key).(string),
+		fromProtected,
+		isError,
+		getFlashmessages(c, "error"),
+		getFlashmessages(c, "success"),
+		links_views.Dashboard(
+			titlePage,
+			c.Scheme()+"://"+c.Request().Host,
+			c.Get(tzone_key).(string),
+			searchedLinks,
+		),
+	)) */
+}
+
 func (a *API) createLinkHandler(c echo.Context) error {
 	isError = false
 

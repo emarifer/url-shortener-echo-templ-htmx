@@ -89,6 +89,9 @@ onclick="
 		e.type = 'password';
 	}"
 
+USING INDEXES TO SPEED UP QUERIES IN POSTGRESQL:
+https://niallburkley.com/blog/index-columns-for-like-in-postgres/
+
 */
 
 /* CHECKS FUNCTIONS:

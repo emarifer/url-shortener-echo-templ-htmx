@@ -40,3 +40,9 @@ services:
 
 # How to Set a TIMESTAMP as a Default Column Value in PostgreSQL:
 # https://www.commandprompt.com/education/how-to-set-a-timestamp-as-a-default-column-value-in-postgresql/
+
+# USING INDEXES TO SPEED UP QUERIES IN POSTGRESQL:
+# https://niallburkley.com/blog/index-columns-for-like-in-postgres/
+
+# Examine the performance of an "ILIKE" query (e.g.):
+# EXPLAIN ANALYSE SELECT * FROM links WHERE description ILIKE '%Sil%' AND user_id='e42e4f12-c647-4d87-b47c-18fc8529e3f1';
