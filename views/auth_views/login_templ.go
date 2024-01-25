@@ -84,7 +84,17 @@ func Login(fromProtected bool) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> <button title=\"View password\" type=\"button\" class=\"absolute top-12 right-3\" _=\"on click if [type of previous &lt;input/&gt;] == &#39;password&#39; then remove [@type=password] from previous &lt;input/&gt; else tell previous &lt;input/&gt; toggle [@type=password] end\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0\"></path> <path d=\"M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7\"></path></svg></button></label><footer class=\"card-actions justify-end\"><button class=\"badge badge-primary px-6 py-4 hover:scale-[1.1]\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("> <button title=\"View password\" type=\"button\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if fromProtected {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" disabled")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" class=\"absolute top-12 right-3\" _=\"on click if [type of previous &lt;input/&gt;] == &#39;password&#39; then remove [@type=password] from previous &lt;input/&gt; else tell previous &lt;input/&gt; toggle [@type=password] end\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0\"></path> <path d=\"M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7\"></path></svg></button></label><footer class=\"card-actions justify-end\"><button class=\"badge badge-primary px-6 py-4 hover:scale-[1.1]\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

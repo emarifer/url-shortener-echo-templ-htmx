@@ -91,6 +91,11 @@ onclick="
 
 USING INDEXES TO SPEED UP QUERIES IN POSTGRESQL:
 https://niallburkley.com/blog/index-columns-for-like-in-postgres/
+https://www.postgresql.org/docs/current/textsearch-indexes.html
+https://www.cybertec-postgresql.com/en/postgresql-more-performance-for-like-and-ilike-statements/
+https://www.yugabyte.com/blog/postgresql-like-query-performance-variations/
+https://www.commandprompt.com/education/select-if-string-contains-a-substring-match-in-postgresql/
+https://dev.to/____marcell/fast-fulltext-search-with-postgres-gin-index-22n5
 
 */
 

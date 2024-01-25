@@ -30,6 +30,12 @@ templ Base(title, username string, fromProtected, isError bool, errMsgs, sucMsgs
 			</header>
 			<main class={ templ.KV("pt-40", !isError) }>
 				{ children... }
+				<div class="flex justify-center absolute bottom-20 right-0 left-0">
+					<span
+ 						id="spinner"
+ 						class="htmx-indicator loading loading-spinner loading-lg text-info"
+					></span>
+				</div>
 				@components.FlashMessages(errMsgs, sucMsgs)
 			</main>
 			<footer>

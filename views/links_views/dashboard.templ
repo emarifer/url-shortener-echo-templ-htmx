@@ -15,20 +15,23 @@ templ Dashboard(titlePage, host, tz string, links []model.Link) {
 			{ strings.Trim(titlePage, "| ") }
 		</h2>
 		<form
- 			action=""
- 			method=""
+ 			action="/dash"
+ 			method="get"
  			class="relative"
- 			hx-push-url="/dash"
 		>
 			<input
- 				hx-get="/dash/search"
+ 				hx-get="/dash"
+ 				hx-trigger="search, keyup delay:500ms changed"
  				hx-target="#cards"
- 				hx-swap="transition:true"
- 				class="input input-bordered input-info bg-slate-800 w-48 rounded-full text-sm px-4 pl-2 pr-10 h-8"
- 				type="text"
+ 				hx-push-url="true"
+ 				hx-indicator="#spinner"
+ 				type="search"
  				name="search"
+ 				class="input input-bordered input-info bg-slate-800 w-48 rounded-full text-sm px-4 pl-2 pr-10 h-8"
 			/>
 			<button
+ 				title="Link search"
+ 				type="submit"
  				class="absolute top-2 right-2 border-l border-l-cyan-400/50 pl-2"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-4 fill-cyan-400">
@@ -50,11 +53,6 @@ templ Dashboard(titlePage, host, tz string, links []model.Link) {
 		if len(links) != 0 {
 			<div id="cards">
 				@components.CardList(host, tz, links)
-				<!-- <ul class="grid grid-cols-3 gap-2">
-					for _, link := range links {
-						@components.Card(host, tz, link)
-					}
-				</ul> -->
 			</div>
 		} else {
 			<p class="text-center text-xl text-info font-semibold">
