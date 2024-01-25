@@ -93,6 +93,13 @@ In the implementation of this application we have used the following technologie
   |- links_views
 ```
 
+<br />
+
+<img src="doc/flow.svg" width="100%">
+
+<br />
+
+
 >[!NOTE]
 >***In this application, we have tried to apply a [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) pattern. The architecture follows a typical "onion model" where each layer doesn't know about the layer above it, and each layer is responsible for a specific thing. Although the application is extremely simple, we use this pattern to illustrate its use in more complex applications. Layering an application in this way can simplify code structure, since the responsibility of each type is clear. To ensure that each part of the application is initialized with its dependencies, each struct defines a constructor (the New function in this example). Related to the latter, we have used a dependency injector ([Fx](https://uber-go.github.io/fx/) from uber-go), which helps to remove the global state in the application and add new components and have them instantly accessible across the application.***
 

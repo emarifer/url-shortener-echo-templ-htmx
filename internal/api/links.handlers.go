@@ -24,15 +24,17 @@ import (
 func (a *API) dashboardHandler(c echo.Context) error {
 	isError = false
 
+	params := dto.SearchQuery{}
+	binder := &echo.DefaultBinder{}
+	binder.BindQueryParams(c, &params)
+	// fmt.Println(params.Search)
+	searchDescription := strings.Trim(params.Search, " ")
+	searchEvent := c.Request().Header.Get("HX-Trigger-Name")
+
 	ctx := c.Request().Context()
 	userId := c.Get(user_id_key).(string)
 
-	if c.Request().Header.Get("HX-Trigger-Name") == "search" {
-		params := dto.SearchQuery{}
-		binder := &echo.DefaultBinder{}
-		binder.BindQueryParams(c, &params)
-		// fmt.Println(params.Search)
-		searchDescription := strings.Trim(params.Search, " ")
+	if searchEvent == "search" {
 		// to observe the request indicator
 		time.Sleep(1 * time.Second)
 
@@ -60,6 +62,37 @@ func (a *API) dashboardHandler(c echo.Context) error {
 		"| %s's Links",
 		cases.Title(language.English).String(c.Get(username_key).(string)),
 	)
+
+	if searchEvent != "search" && searchDescription != "" {
+		searchedLinks, err := a.serv.SearchLinksByDescription(
+			ctx, searchDescription, userId,
+		)
+		if err != nil {
+
+			return echo.NewHTTPError(
+				echo.ErrInternalServerError.Code,
+				fmt.Sprintf(
+					"something went wrong: %s",
+					err,
+				))
+		}
+
+		return a.renderView(c, links_views.DashboardIndex(
+			titlePage,
+			c.Get(username_key).(string),
+			fromProtected,
+			isError,
+			getFlashmessages(c, "error"),
+			getFlashmessages(c, "success"),
+			links_views.Dashboard(
+				titlePage,
+				c.Scheme()+"://"+c.Request().Host,
+				c.Get(tzone_key).(string),
+				searchedLinks,
+			),
+		))
+
+	}
 
 	links, err := a.serv.RecoverLinks(ctx, userId)
 	if err != nil {

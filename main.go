@@ -96,6 +96,8 @@ https://www.cybertec-postgresql.com/en/postgresql-more-performance-for-like-and-
 https://www.yugabyte.com/blog/postgresql-like-query-performance-variations/
 https://www.commandprompt.com/education/select-if-string-contains-a-substring-match-in-postgresql/
 https://dev.to/____marcell/fast-fulltext-search-with-postgres-gin-index-22n5
+Check trigram index:
+https://stackoverflow.com/questions/54432677/why-postgresql-doesnt-use-trigram-index
 
 */
 
