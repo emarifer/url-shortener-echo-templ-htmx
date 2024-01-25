@@ -53,7 +53,7 @@ In the implementation of this application we have used the following technologie
 
 ###### Short link creator Page and Dashboard Page with alerts:
 
-<img src="doc/screenshot-03.png" width="35%" align="top">&nbsp;&nbsp;&nbsp;&nbsp;<img src="doc/screenshot-04.png" width="35%">
+<img src="doc/screenshot-03.png" width="35%" align="top">&nbsp;&nbsp;&nbsp;&nbsp;<img src="doc/screenshot-04-v.2.png" width="35%">
 
 ###### Dashboard Page with alert and Short Link Update Modal:
 
