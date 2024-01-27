@@ -49,7 +49,7 @@ In the implementation of this application we have used the following technologie
 
 ###### Home & Login Pages with success alert:
 
-<img src="doc/screenshot-01.png" width="35%" align="top">&nbsp;&nbsp;&nbsp;&nbsp;<img src="doc/screenshot-02.png" width="35%">
+<img src="doc/screenshot-01.png" width="35%" align="top">&nbsp;&nbsp;&nbsp;&nbsp;<img src="doc/screenshot-02-v.2.png" width="35%">
 
 ###### Short link creator Page and Dashboard Page with alerts:
 
